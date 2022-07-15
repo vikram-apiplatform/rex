@@ -11,8 +11,13 @@ img {
 .type {
   font-size: 16px;
   font-weight: bold;
-  font-family: ui-sans-serif;
+  font-family: Playfair Display;
   width: 70%;
+  cursor:pointer;
+}
+
+.type:hover {
+  color: orange;
 }
 
 .price {
@@ -31,11 +36,13 @@ img {
   height: 30px;
   overflow: hidden;
   text-overflow: ellipsis;
+  cursor: pointer;
 }
 
 .feature {
   font-size: 12px;
   color: orange;
+  cursor: pointer;
 }
 
 .example-spacer {

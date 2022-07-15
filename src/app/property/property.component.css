@@ -1,0 +1,48 @@
+.feature-list {
+  font-weight: bold;
+  padding-left: 5%;
+  font-size:17px;
+  line-height: 2rem;
+  font-family: ui-sans-serif;
+}
+
+.type {
+  color: orange;
+  font-weight: bold;
+  font-family: Playfair Display;
+  font-size: 24px;
+}
+
+.contact-btn{
+  margin-right: 20px;
+  font-family: Playfair Display;
+  font-weight: bold;
+  background: white;
+  color: #05471f;
+
+}
+
+
+.contact-btn:hover {
+  background: #05471f;
+  color:white;
+}
+
+.property-desc {
+  margin-top: 3rem;
+  font-size: 26px;
+  font-weight: bold;
+  font-family: Playfair Display;
+}
+
+.property-subdesc {
+  font-family: Playfair Display;
+  font-size: 15px;
+  line-height: 1.5rem;
+}
+.property-list {
+  font-family: Playfair Display;
+  font-size: 15px;
+  line-height: 1.5rem;
+  font-weight: 600;
+}
