@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import {ServicesService} from "../services.service";
 
 @Component({
   selector: 'app-property',
@@ -8,11 +9,15 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 })
 export class PropertyComponent implements OnInit {
 
+
+  id: any;
+  token:any;
   address: any;
   img: any;
   type: any;
   price: any;
   features: any;
+  note:any;
 
   list = [
     {
@@ -73,18 +78,35 @@ export class PropertyComponent implements OnInit {
     }
   ];
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private service: ServicesService) {
     this.route.paramMap.subscribe(params => {
-      this.address = params.get('address');
+      this.id = params.get('id');
     });
-    for(const item of this.list) {
-      if(item['address'].includes(this.address)){
-        this.img = item['img'];
-        this.type = item['type'];
-        this.price = item['price'];
-        this.features = item['features'];
+    this.token = localStorage.getItem('token');
+    this.service.getProperty(this.token,this.id).subscribe(res=>{
+      // console.log(res);
+      let tempProperty:any = res;
+      if (res){
+        this.address = tempProperty['result']['system_search_key'];
+        this.type = tempProperty['result']['property_category']['text'];
+        this.note = tempProperty['result']['note'];
+        let featuresList:any = tempProperty['result']['related']['property_features'];
+        let featureList:any = [];
+        for(const feature of featuresList) {
+          featureList.push(feature.feature_name);
+        }
+        this.features = featureList;
+        this.img = 'https:'+tempProperty['result']['default_property_image']['url'];
       }
-    }
+    })
+    // for(const item of this.list) {
+    //   if(item['address'].includes(this.address)){
+    //     this.img = item['img'];
+    //     this.type = item['type'];
+    //     this.price = item['price'];
+    //     this.features = item['features'];
+    //   }
+    // }
   }
 
   ngOnInit(): void {

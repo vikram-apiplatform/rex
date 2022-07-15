@@ -8,7 +8,7 @@ import {PropertyComponent} from "./property/property.component";
   imports: [
     RouterModule.forRoot([
       { path: 'listing', component: ListingComponent },
-      { path: 'property/:address', component: PropertyComponent},
+      { path: 'property/:id', component: PropertyComponent},
       { path: 'property', component: PropertyComponent },
       { path: '**', redirectTo: 'listing' }
     ])

@@ -10,7 +10,7 @@
       <mat-label>Search</mat-label>
       <input matInput type="text" [(ngModel)]="searchValue" (ngModelChange)="searchProperty($event)">
       <button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear"
-              (click)="searchValue=''; filteredList = list;">
+              (click)="searchValue=''; filteredList = listings;">
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
@@ -39,16 +39,17 @@
       <mat-card class="col-md-3 col-lg-3 col-sm-12 col-xs-12">
         <div style="width: 100%;display: flex;">
           <p class="type" (click)="onClickType(item.type)">{{item.type}}</p>
-          <p class="price">{{item.price}}</p>
+          <p class="price" title="{{item.price}}">{{item.price}}</p>
         </div>
-        <div style="width: 100%;" [routerLink]="['/property', item.address]" style="cursor: pointer;">
+        <div style="width: 100%;" [routerLink]="['/property', item.id]" style="cursor: pointer;">
           <img [src]="item.img" >
         </div>
-        <div class="address" [routerLink]="['/property', item.address]">
+        <div class="address" [routerLink]="['/property', item.id]">
           <span title="{{item.address}}">{{item.address}}</span>
         </div>
-        <div class="feature" [routerLink]="['/property', item.address]">
-          {{item.features}}
+        <div class="feature" [routerLink]="['/property', item.id]">
+          <span *ngIf="item.features" title="{{item.features}}">{{item.features}}</span>
+          <span *ngIf="item.features==''" >NA</span>
         </div>
       </mat-card>
     </div>

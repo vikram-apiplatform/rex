@@ -6,6 +6,7 @@
 
 img {
   width: -webkit-fill-available;
+  height:175px;
 }
 
 .type {
@@ -24,7 +25,11 @@ img {
   text-align: right;
   width: 30%;
   font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   color: royalblue;
+  white-space: nowrap;
+
 }
 
 .address {
@@ -43,6 +48,9 @@ img {
   font-size: 12px;
   color: orange;
   cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .example-spacer {
