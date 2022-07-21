@@ -42,7 +42,11 @@ export class ServicesService {
     const url = 'https://api.rexsoftware.com/v1/rex/listings/search';
 
     const payload = {
-      "offset": 0
+      "limit": 100,
+      "offset": 0,
+      "criteria": [
+        {"system_listing_state": "current"}
+      ]
     }
 
     return this.http.post(url, payload, this.httpOptions)

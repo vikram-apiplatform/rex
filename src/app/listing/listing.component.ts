@@ -12,8 +12,12 @@ export class ListingComponent implements OnInit {
   searchValue = '';
   selectedProperty = '';
   selectedFeature = '';
+  selectedState = '';
+  selectedSpecification = '';
   propertyTypes:any  = [];
   features:any = [];
+  states:any = [];
+  specifications:any = [];
 
   filteredList: any;
 
@@ -91,6 +95,7 @@ export class ListingComponent implements OnInit {
         this.token = temp['result'];
         localStorage.setItem('token', this.token);
         this.service.getListings(this.token).subscribe(res1 => {
+          // console.log(res1)
           let tempListing: any = res1;
           if (res1) {
             let result = tempListing['result']['rows'];
@@ -105,14 +110,26 @@ export class ListingComponent implements OnInit {
               obj['longitude'] = item.property.adr_longitude;
               obj['address'] = item.property.system_search_key;
               obj['type'] = item.property.property_category.text;
+              obj['state'] = item.system_listing_state
+              if (!this.states.includes(item.system_listing_state)) {
+                this.states.push(item.system_listing_state);
+              }
               if (!this.propertyTypes.includes(item.property.property_category.text)) {
                 this.propertyTypes.push(item.property.property_category.text);
               }
-              obj['img'] = 'https:'+item.property.property_image.url;
+              if (item.listing_primary_image !== null){
+                obj['img'] = 'https:'+item.listing_primary_image.url;
+              }
+              else {
+                obj['img'] = 'https://i2.au.reastatic.net/360x270-format=avif,/b33bb4e47b9db0bcdac2a8e2eb469d51d09b08413f5d4024ca9b0b9cc0c921ea/image.jpg';
+              }
               obj['id'] = item.property.id;
               this.service.getProperty(this.token, item.property.id).subscribe(res2 => {
                 let tempProperty: any = res2;
                 if(res2){
+                  obj['bedrooms'] = tempProperty['result']['attr_bedrooms'];
+                  obj['bathrooms'] = tempProperty['result']['attr_bathrooms'];
+                  obj['carports'] = tempProperty['result']['attr_total_car_accom'];
                   let featuresList:any = tempProperty['result']['related']['property_features'];
                   let featureList:any = [];
                   for(const feature of featuresList){
@@ -122,11 +139,22 @@ export class ListingComponent implements OnInit {
                     featureList.push(feature.feature_name);
                   }
                   obj['features'] = featureList;
+                  if (obj['address'],obj['bedrooms'],obj['bathrooms'],obj['carports']) {
+                    let tempSpecification = [obj['bedrooms']+' Bedroom',obj['bathrooms']+' Bathroom',obj['carports']+' Car Space'];
+                    obj['specification'] = tempSpecification;
+                    for (let item of tempSpecification){
+                      if(!this.specifications.includes(item)){
+                        this.specifications.push(item)
+                      }
+                    }
+                    this.specifications = this.specifications.sort();
+                    this.listings.push(obj);
+                  }
+                  // console.log(this.listings)
+
                 }
               });
-              this.listings.push(obj);
             }
-            // console.log(this.listings)
             this.filteredList = this.listings;
           }
         });
@@ -135,6 +163,9 @@ export class ListingComponent implements OnInit {
   }
 
   searchProperty(e: any) {
+    this.selectedProperty = '';
+    this.selectedState = '';
+    this.selectedFeature = '';
     const filterValue = e.toLowerCase();
     let temp:any = this.listings;
     if (filterValue !== undefined && filterValue !== '') {
@@ -147,6 +178,9 @@ export class ListingComponent implements OnInit {
   }
 
   onChangeProperty(e: any) {
+    this.selectedState = '';
+    this.selectedFeature = '';
+    this.searchValue = '';
     const filterValue = e.value;
     let temp = this.listings;
     if (filterValue !== undefined) {
@@ -157,7 +191,24 @@ export class ListingComponent implements OnInit {
     }
   }
 
+  onChangePropertyState(e: any) {
+    this.selectedProperty = '';
+    this.selectedFeature = '';
+    this.searchValue = '';
+    const filterValue = e.value;
+    let temp = this.listings;
+    if (filterValue !== undefined) {
+      temp = temp.filter((option:any) => option['specification'].includes(filterValue));
+      this.filteredList = temp;
+    } else {
+      this.filteredList = this.listings;
+    }
+  }
+
   onChangeFeature(e: any) {
+    this.selectedState = '';
+    this.selectedProperty = '';
+    this.searchValue = '';
     const filterValue = e.value;
     let temp = this.listings;
     if (filterValue !== undefined) {

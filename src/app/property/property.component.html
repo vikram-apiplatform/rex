@@ -15,9 +15,13 @@
     </div>
     <div style="width:45%;">
       <p class="type" style="line-height: 3rem;">{{type}}</p>
+      <p class="type" style="line-height: 3rem; color:green">{{bedroom}} Bedroom,  {{bathroom}} Bathroom,  {{carspace}} Car Space</p>
 
       <p class="type">Features</p>
+      <div style="height: 28vh;
+    overflow: hidden;">
       <li *ngFor="let item of features" class="feature-list">{{item}}</li>
+      </div>
       <p class="type" style="line-height: 5rem;">{{price}}</p>
 
       <div style="width:100%;">

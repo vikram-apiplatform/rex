@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, ParamMap} from '@angular/router';
 import {ServicesService} from "../services.service";
 
 @Component({
@@ -11,13 +11,16 @@ export class PropertyComponent implements OnInit {
 
 
   id: any;
-  token:any;
+  token: any;
   address: any;
   img: any;
   type: any;
   price: any;
   features: any;
-  note:any;
+  note: any;
+  bedroom = 0;
+  bathroom = 0;
+  carspace = 0;
 
   list = [
     {
@@ -83,20 +86,22 @@ export class PropertyComponent implements OnInit {
       this.id = params.get('id');
     });
     this.token = localStorage.getItem('token');
-    this.service.getProperty(this.token,this.id).subscribe(res=>{
-      // console.log(res);
-      let tempProperty:any = res;
-      if (res){
+    this.service.getProperty(this.token, this.id).subscribe(res => {
+      let tempProperty: any = res;
+      if (res) {
         this.address = tempProperty['result']['system_search_key'];
         this.type = tempProperty['result']['property_category']['text'];
         this.note = tempProperty['result']['note'];
-        let featuresList:any = tempProperty['result']['related']['property_features'];
-        let featureList:any = [];
-        for(const feature of featuresList) {
+        this.bedroom = tempProperty['result']['attr_bedrooms'];
+        this.bathroom = tempProperty['result']['attr_bathrooms'];
+        this.carspace = tempProperty['result']['attr_total_car_accom'];
+        let featuresList: any = tempProperty['result']['related']['property_features'];
+        let featureList: any = [];
+        for (const feature of featuresList) {
           featureList.push(feature.feature_name);
         }
         this.features = featureList;
-        this.img = 'https:'+tempProperty['result']['default_property_image']['url'];
+        this.img = 'https:' + tempProperty['result']['default_property_image']['url'];
       }
     })
     // for(const item of this.list) {
