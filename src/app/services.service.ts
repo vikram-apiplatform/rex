@@ -21,14 +21,9 @@ export class ServicesService {
         'apikey': '7xR2sYhqRAdfhhyu6jMo9E9hi4fRazuw'
       })
     };
-    const url = 'https://dev-vikram.gateway.apiplatform.io/v1/rexLogin';
-
-    const payload = {
-      "email": "mick@foxs.com.au",
-      "password": "Georgia1"
-    }
-
-    return this.http.post(url, payload, this.httpOptions)
+    const url = 'https://dev-vikram.gateway.apiplatform.io/v2/rexLogin';
+    
+    return this.http.get(url, this.httpOptions)
       .pipe(map(res => res));
   }
 
