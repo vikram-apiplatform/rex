@@ -1,11 +1,11 @@
-<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 p-3 main-div">
   <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-    <p
-      style="padding:20px;margin-top:30px; width: 100%;text-align: center;font-size: 36px;font-weight: bold;font-family: auto;">
-      Our
-      Listings</p>
+    <!--    <p-->
+    <!--      style="padding:20px;margin-top:30px; text-align: center;font-size: 36px;font-weight: bold;font-family: auto;" class="w-100">-->
+    <!--      Our-->
+    <!--      Listings</p>-->
   </div>
-  <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="display:flex;width:100%;margin:10px 5%;">
+  <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="display:flex;width:100%; margin:10px 5%;">
     <mat-form-field style="width:43%;margin-right:10px;" class="example-form-field" appearance="outline">
       <mat-label>Search</mat-label>
       <input matInput type="text" [(ngModel)]="searchValue" (ngModelChange)="searchProperty($event)">
@@ -43,23 +43,23 @@
     </mat-form-field>
   </div>
   <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12"
-       style="width: 100%;display:flex;flex-flow:row wrap;margin: 10px 5%;">
+       style="width: 100%;display:flex;flex-flow:row wrap;margin: 10px 1%;">
     <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12" class="box" *ngFor="let item of filteredList">
-      <mat-card class="col-md-3 col-lg-3 col-sm-12 col-xs-12">
+      <mat-card class="col-md-3 col-lg-3 col-sm-12 col-xs-12 transform shadow-0 border-gainsboro">
         <div style="width: 100%;display: flex;">
           <p class="type" (click)="onClickType(item.type)">{{item.type}}</p>
           <p class="price" title="{{item.price}}">{{item.price}}</p>
         </div>
-        <div style="width: 100%;" [routerLink]="['/property', item.id]" style="cursor: pointer;">
+        <div [routerLink]="['/property', item.id]" class="w-100 ovr-h cr-ptr">
           <img [src]="item.img" >
         </div>
         <div class="address" [routerLink]="['/property', item.id]">
           <span title="{{item.address}}">{{item.address}}</span>
         </div>
-        <div class="feature" [routerLink]="['/property', item.id]">
-          <span *ngIf="item.features" title="{{item.features}}">{{item.features}}</span>
-          <span *ngIf="item.features==''" >NA</span>
-        </div>
+        <!--        <div class="feature" [routerLink]="['/property', item.id]">-->
+        <!--          <span *ngIf="item.features" title="{{item.features}}">{{item.features}}</span>-->
+        <!--          <span *ngIf="item.features==''" >NA</span>-->
+        <!--        </div>-->
         <div class="specification">
           <span>{{item.bedrooms}} Bedroom, </span><span> {{item.bathrooms}} Bathroom, </span><span> {{item.carports}} Car Space</span>
         </div>
