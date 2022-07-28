@@ -38,9 +38,21 @@ export class ServicesService {
 
   getProperty(id: any) {
 
-    const url = 'https://dev-vikram.gateway.apiplatform.io/v1/rexProperty?id=' + id;
+    const url = 'https://dev-vikram.gateway.apiplatform.io/v2/rexProperty?id=' + id;
 
     return this.http.get(url, this.httpOptions)
+      .pipe(map(res => res));
+  }
+
+  getProperties(ids: any) {
+
+    const payload = {
+      'ids' : ids
+    }
+
+    const url = 'https://dev-vikram.gateway.apiplatform.io/v2/rexproperties';
+
+    return this.http.post(url, payload, this.httpOptions)
       .pipe(map(res => res));
   }
 }

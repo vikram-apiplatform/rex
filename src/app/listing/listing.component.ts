@@ -14,10 +14,10 @@ export class ListingComponent implements OnInit {
   selectedFeature = '';
   selectedState = '';
   selectedSpecification = '';
-  propertyTypes:any  = [];
-  features:any = [];
-  states:any = [];
-  specifications:any = [];
+  propertyTypes: any = [];
+  features: any = [];
+  states: any = [];
+  specifications: any = [];
 
   filteredList: any;
 
@@ -80,86 +80,125 @@ export class ListingComponent implements OnInit {
     }
   ];
 
-  listings:any = [];
+  listings: any = [];
+  id_list: any = [];
 
 
   constructor(private service: ServicesService) {
-    // this.filteredList = this.list;
-
   }
 
   ngOnInit(): void {
-    this.service.getToken().subscribe(res => {
-      let temp: any = res;
-      if (res) {
-        this.token = temp['result'];
-        localStorage.setItem('token', this.token);
-        this.service.getListings(this.token).subscribe(res1 => {
-          // console.log(res1)
-          let tempListing: any = res1;
-          if (res1) {
-            let result = tempListing['result']['rows'];
-            for (const item of result) {
-              let obj: any = {};
+    this.service.getListing().subscribe(res1 => {
+      let tempListing: any = res1;
+      this.id_list = [];
+      if (res1) {
+        let result = tempListing['result']['rows'];
+        for (const item of result) {
+          let obj: any = {};
 
-              obj['price'] = item.price_advertise_as;
-              if (item.under_contract === true) {
-                obj['price'] = 'Under Contract';
-              }
-              obj['latitude'] = item.property.adr_latitude;
-              obj['longitude'] = item.property.adr_longitude;
-              obj['address'] = item.property.system_search_key;
-              obj['type'] = item.property.property_category.text;
-              obj['state'] = item.system_listing_state
-              if (!this.states.includes(item.system_listing_state)) {
-                this.states.push(item.system_listing_state);
-              }
-              if (!this.propertyTypes.includes(item.property.property_category.text)) {
-                this.propertyTypes.push(item.property.property_category.text);
-              }
-              if (item.listing_primary_image !== null){
-                obj['img'] = 'https:'+item.listing_primary_image.url;
-              }
-              else {
-                obj['img'] = 'https://i2.au.reastatic.net/360x270-format=avif,/b33bb4e47b9db0bcdac2a8e2eb469d51d09b08413f5d4024ca9b0b9cc0c921ea/image.jpg';
-              }
-              obj['id'] = item.property.id;
-              this.service.getProperty(this.token, item.property.id).subscribe(res2 => {
-                let tempProperty: any = res2;
-                if(res2){
-                  obj['bedrooms'] = tempProperty['result']['attr_bedrooms'];
-                  obj['bathrooms'] = tempProperty['result']['attr_bathrooms'];
-                  obj['carports'] = tempProperty['result']['attr_total_car_accom'];
-                  let featuresList:any = tempProperty['result']['related']['property_features'];
-                  let featureList:any = [];
-                  for(const feature of featuresList){
+          obj['price'] = item.price_advertise_as;
+          if (item.under_contract === true) {
+            obj['price'] = 'Under Contract';
+          }
+          obj['latitude'] = item.property.adr_latitude;
+          obj['longitude'] = item.property.adr_longitude;
+          obj['address'] = item.property.system_search_key;
+          obj['type'] = item.property.property_category.text;
+          obj['state'] = item.system_listing_state
+          if (!this.states.includes(item.system_listing_state)) {
+            this.states.push(item.system_listing_state);
+          }
+          if (!this.propertyTypes.includes(item.property.property_category.text)) {
+            this.propertyTypes.push(item.property.property_category.text);
+          }
+          if (item.listing_primary_image !== null) {
+            obj['img'] = 'https:' + item.listing_primary_image.url;
+          } else {
+            obj['img'] = 'https://i2.au.reastatic.net/360x270-format=avif,/b33bb4e47b9db0bcdac2a8e2eb469d51d09b08413f5d4024ca9b0b9cc0c921ea/image.jpg';
+          }
+          obj['id'] = item.property.id;
+          if (obj['price'] != null && obj['price'] != 'Call Agent') {
+            this.listings.push(obj);
+            this.id_list.push(item.property.id);
+          }
+
+          // this.service.getProperty(item.property.id).subscribe(res2 => {
+          //   let tempProperty: any = res2;
+          //   if(res2){
+          //     obj['bedrooms'] = tempProperty['result']['attr_bedrooms'];
+          //     obj['bathrooms'] = tempProperty['result']['attr_bathrooms'];
+          //     obj['carports'] = tempProperty['result']['attr_total_car_accom'];
+          //     let featuresList:any = tempProperty['result']['related']['property_features'];
+          //     let featureList:any = [];
+          //     for(const feature of featuresList){
+          //       if (!this.features.includes(feature.feature_name)) {
+          //         this.features.push(feature.feature_name);
+          //       }
+          //       featureList.push(feature.feature_name);
+          //     }
+          //     obj['features'] = featureList;
+          //     if (obj['address'],obj['bedrooms'],obj['bathrooms'],obj['carports']) {
+          //       let tempSpecification = [obj['bedrooms']+' Bedroom',obj['bathrooms']+' Bathroom',obj['carports']+' Car Space'];
+          //       obj['specification'] = tempSpecification;
+          //       for (let item of tempSpecification){
+          //         if(!this.specifications.includes(item)){
+          //           this.specifications.push(item)
+          //         }
+          //       }
+          //       this.specifications = this.specifications.sort();
+          //       this.listings.push(obj);
+          //     }
+          //     // console.log(this.listings)
+          //
+          //   }
+          // });
+        }
+        // console.log(this.listings)
+        this.service.getProperties(this.id_list).subscribe(res2 => {
+          let temp: any = res2;
+          if (res2) {
+            for (let item of temp) {
+              let result = item['result'];
+              for (let obj of this.listings) {
+                if (String(result['id']) === String(obj['id'])) {
+                  obj['bedrooms'] = result['attr_bedrooms'];
+                  obj['bathrooms'] = result['attr_bathrooms'];
+                  obj['carports'] = result['attr_total_car_accom'];
+                  let featuresList: any = result['related']['property_features'];
+                  let featureList: any = [];
+                  for (const feature of featuresList) {
                     if (!this.features.includes(feature.feature_name)) {
                       this.features.push(feature.feature_name);
                     }
                     featureList.push(feature.feature_name);
                   }
                   obj['features'] = featureList;
-                  if (obj['address'],obj['bedrooms'],obj['bathrooms'],obj['carports']) {
-                    let tempSpecification = [obj['bedrooms']+' Bedroom',obj['bathrooms']+' Bathroom',obj['carports']+' Car Space'];
+                  if (obj['address'] && obj['bedrooms']&& obj['bathrooms']&& obj['carports']) {
+                    let tempSpecification = [obj['bedrooms'] + ' Bedroom', obj['bathrooms'] + ' Bathroom', obj['carports'] + ' Car Space'];
                     obj['specification'] = tempSpecification;
-                    for (let item of tempSpecification){
-                      if(!this.specifications.includes(item)){
+
+                    for (let item of tempSpecification) {
+                      if (!this.specifications.includes(item)) {
                         this.specifications.push(item)
                       }
                     }
                     this.specifications = this.specifications.sort();
-                    this.listings.push(obj);
                   }
-                  // console.log(this.listings)
-
                 }
-              });
+              }
             }
-            this.filteredList = this.listings;
+            for(let i=0; i<this.listings.length;i++){
+              if (!this.listings[i]['bedrooms']|| !this.listings[i]['bathrooms']||!this.listings[i]['carports']){
+                this.listings.splice(i,1);
+              }
+            }
           }
         });
+
+        this.filteredList = this.listings;
+        // console.log(this.filteredList)
       }
-    })
+    });
   }
 
   searchProperty(e: any) {
@@ -167,9 +206,9 @@ export class ListingComponent implements OnInit {
     this.selectedState = '';
     this.selectedFeature = '';
     const filterValue = e.toLowerCase();
-    let temp:any = this.listings;
+    let temp: any = this.listings;
     if (filterValue !== undefined && filterValue !== '') {
-      temp = temp.filter((option:any) => option['address'].toLowerCase().includes(filterValue));
+      temp = temp.filter((option: any) => option['address'].toLowerCase().includes(filterValue));
       this.filteredList = temp;
     } else {
       this.filteredList = this.listings;
@@ -184,7 +223,7 @@ export class ListingComponent implements OnInit {
     const filterValue = e.value;
     let temp = this.listings;
     if (filterValue !== undefined) {
-      temp = temp.filter((option:any) => option['type'] === filterValue);
+      temp = temp.filter((option: any) => option['type'] === filterValue);
       this.filteredList = temp;
     } else {
       this.filteredList = this.listings;
@@ -198,7 +237,7 @@ export class ListingComponent implements OnInit {
     const filterValue = e.value;
     let temp = this.listings;
     if (filterValue !== undefined) {
-      temp = temp.filter((option:any) => option['specification'].includes(filterValue));
+      temp = temp.filter((option: any) => option['specification'].includes(filterValue));
       this.filteredList = temp;
     } else {
       this.filteredList = this.listings;
@@ -212,7 +251,7 @@ export class ListingComponent implements OnInit {
     const filterValue = e.value;
     let temp = this.listings;
     if (filterValue !== undefined) {
-      temp = temp.filter((option:any) => option['features'].includes(filterValue));
+      temp = temp.filter((option: any) => option['features'].includes(filterValue));
       this.filteredList = temp;
     } else {
       this.filteredList = this.listings;
@@ -226,7 +265,7 @@ export class ListingComponent implements OnInit {
     const filterValue = type;
     let temp = this.listings;
     if (filterValue !== undefined) {
-      temp = temp.filter((option:any) => option['type'] === filterValue);
+      temp = temp.filter((option: any) => option['type'] === filterValue);
       this.filteredList = temp;
     } else {
       this.filteredList = this.listings;

@@ -1,23 +1,20 @@
 .box {
-  width: 18vw;
+  width: 21vw;
   margin-right: 25px;
   margin-bottom: 20px;
 }
-.p-3{
-  padding: 3em 0 0 0;
-}
+
 img {
   width: -webkit-fill-available;
-  height:175px;
-  border-radius: 0.25em;
+  height: 175px;
 }
 
 .type {
   font-size: 16px;
   font-weight: bold;
-  font-family: Playfair Display, serif;
+  font-family: Playfair Display;
   width: 50%;
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .type:hover {
@@ -37,14 +34,15 @@ img {
 
 .address {
   margin-top: 10px;
+  line-height: 30px;
   /*white-space: nowrap;*/
   width: 100%;
   height: 60px;
-  /*overflow: hidden;*/
+  overflow: hidden;
   /*text-overflow: ellipsis;*/
   cursor: pointer;
   color: #06471f;
-  font-family: Lora, serif;
+  font-family: Lora;
   font-weight: 700;
   font-size: 24px
 }
@@ -59,6 +57,7 @@ img {
 }
 
 .specification {
+  margin-top: 5px;
   cursor: pointer;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -67,15 +66,18 @@ img {
   color: #f9a127;
   font-weight: 500;
 }
+
 .example-spacer {
   flex: 1 1 auto;
 }
+
 .transform:hover{
   transition: transform 1.5s;
   transform: scale(1.1);
 }
 .cr-ptr{
   cursor: pointer;
+  overflow: hidden;
 }
 .w-100{
   width: 100%;
