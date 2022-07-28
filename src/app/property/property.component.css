@@ -1,82 +1,48 @@
 .feature-list {
   font-weight: bold;
   padding-left: 5%;
-  font-size: 17px;
+  font-size:17px;
   line-height: 2rem;
-  font-family: Poppins, serif;
-  color: #03180a;}
+  font-family: ui-sans-serif;
+}
 
 .type {
   color: orange;
-  font-family: Poppins, serif;
-  font-weight: 500;
-  font-size: 17px;
-  line-height: 19px;
-  margin-bottom: 5px;
+  font-weight: bold;
+  font-family: Playfair Display;
+  font-size: 24px;
 }
 
-.contact-btn {
+.contact-btn{
   margin-right: 20px;
-  font-family: Playfair Display, serif;
+  font-family: Playfair Display;
   font-weight: bold;
   background: white;
   color: #05471f;
+
 }
+
+
 .contact-btn:hover {
   background: #05471f;
-  color: white;
+  color:white;
 }
+
 .property-desc {
   margin-top: 3rem;
-  font-size: 36px;
-  font-weight: 700;
-  font-family: Playfair Display, serif;
-  color: #05471f;
+  font-size: 26px;
+  font-weight: bold;
+  font-family: Playfair Display;
 }
 
 .property-subdesc {
-  font-family: Poppins, serif;
-  color: #03180a;
+  font-family: Playfair Display;
   font-size: 15px;
   line-height: 1.5rem;
 }
-
 .property-list {
-  font-family: Poppins, serif;
-  color: #03180a;
+  font-family: Playfair Display;
   font-size: 15px;
   line-height: 1.5rem;
   font-weight: 600;
 }
-.address {
-  padding: 20px;
-  margin-top: 30px;
-  margin-bottom: 20px;
-  width: 100%;
-  text-align: center;
-  font-size: 36px;
-  font-weight: bold;
-  font-family: auto, serif;
-}
-.d-flex{
-  display: flex;
-}
-.w-100{
-  width: 100%;
-}
-.m-10{
-  margin: 10px 5%;
-}
-.w-55{
-  width: 55%;
-}
-.h-400{
-  height: 400px;
-}
-.w-95{
-  width: 95%;
-}
-.w-45{
-  width: 45%;
-}
-
