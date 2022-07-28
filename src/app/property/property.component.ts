@@ -85,8 +85,7 @@ export class PropertyComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.id = params.get('id');
     });
-    this.token = localStorage.getItem('token');
-    this.service.getProperty(this.token, this.id).subscribe(res => {
+    this.service.getProperty(this.id).subscribe(res => {
       let tempProperty: any = res;
       if (res) {
         this.address = tempProperty['result']['system_search_key'];

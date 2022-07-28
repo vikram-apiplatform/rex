@@ -1,25 +1,23 @@
 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-  <div style="width:100%;margin:10px 5%;">
+  <div class="m-10 w-100">
     <p routerLink="/" style="text-decoration: underline;cursor: pointer;">Back</p>
   </div>
   <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-    <p
-      style="padding:20px;margin-top:30px;margin-bottom:20px; width: 100%;text-align: center;font-size: 36px;font-weight: bold;font-family: auto;">
+    <p class="address">
       {{address}}
     </p>
   </div>
-  <div style="display:flex;width:100%;margin:10px 5%;">
-
-    <div style="width:55%;">
-      <img [src]="img" style="height: 400px;width: 95%;">
+  <div class="d-flex w-100 m-10">
+    <div class="w-55">
+      <img [src]="img" class="h-400 w-95">
     </div>
-    <div style="width:45%;">
+    <div class="w-45">
       <p class="type" style="line-height: 3rem;">{{type}}</p>
       <p class="type" style="line-height: 3rem; color:green">{{bedroom}} Bedroom,  {{bathroom}} Bathroom,  {{carspace}} Car Space</p>
 
       <p class="type">Features</p>
       <div style="height: 28vh;
-    overflow: hidden;">
+    overflow: hidden; margin: 0 0 1em 0">
         <li *ngFor="let item of features" class="feature-list">{{item}}</li>
       </div>
       <p class="type" style="line-height: 5rem;">{{price}}</p>
@@ -30,8 +28,8 @@
       </div>
     </div>
   </div>
-  <div style="display:flex;width:100%;margin:10px 5%;">
-    <div style="width:51%;">
+  <div>
+    <div style="width:96%; padding: 0 4%">
       <p class="property-desc">Property Description</p>
       <br>
       <p class="property-subdesc">Amazing access to all that the beautiful Broadwater has to offer including windsurfing, jet skiing, kayaking,
@@ -55,10 +53,9 @@
         contact Fox's Real Estate on 55323333.
         “A Local Agent You Can Trust”</p>
     </div>
-    <div style="width: 41%;padding-left: 4%;margin-top: 10%;">
-      <img src="../../assets/map.png" style="height: 345px;width: 87%;">
-    </div>
-
+  </div>
+  <div style="/*display:flex; width:100%; margin:10px 5%; padding-left: 1%; padding: 0 0% 0 2%;*/ display: flex; width: 98%; margin: 10px 3%;">
+    <img src="../../assets/map.png" style="height: inherit; width: inherit;">
   </div>
 
 

@@ -6,7 +6,7 @@
 
 img {
   width: -webkit-fill-available;
-  height:175px;
+  height: 175px;
 }
 
 .type {
@@ -14,7 +14,7 @@ img {
   font-weight: bold;
   font-family: Playfair Display;
   width: 50%;
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .type:hover {
@@ -27,21 +27,24 @@ img {
   font-size: 12px;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: royalblue;
+  color: #03180a;
   white-space: nowrap;
 
 }
 
 .address {
   margin-top: 10px;
-  white-space: nowrap;
-  font-weight: bold;
+  line-height: 30px;
+  /*white-space: nowrap;*/
   width: 100%;
-  font-size: 16px;
-  height: 30px;
+  height: 60px;
   overflow: hidden;
-  text-overflow: ellipsis;
+  /*text-overflow: ellipsis;*/
   cursor: pointer;
+  color: #06471f;
+  font-family: Lora;
+  font-weight: 700;
+  font-size: 24px
 }
 
 .feature {
@@ -54,13 +57,31 @@ img {
 }
 
 .specification {
-  font-size: 12px;
-  color: green;
+  margin-top: 5px;
   cursor: pointer;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-size: 13px;
+  color: #f9a127;
+  font-weight: 500;
 }
+
 .example-spacer {
   flex: 1 1 auto;
+}
+
+.transform:hover{
+  transition: transform 1.5s;
+  transform: scale(1.1);
+}
+.cr-ptr{
+  cursor: pointer;
+  overflow: hidden;
+}
+.w-100{
+  width: 100%;
+}
+.shadow-0{
+  box-shadow: none;
 }
