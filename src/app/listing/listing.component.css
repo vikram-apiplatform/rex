@@ -84,6 +84,7 @@ img {
 }
 .shadow-0{
   box-shadow: none;
+  width: 90%;
 }
 
 @media screen and (max-width: 400px) {
