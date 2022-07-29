@@ -7,11 +7,11 @@
       {{address}}
     </p>
   </div>
-  <div class="d-flex w-100 m-10">
-    <div class="w-55">
+  <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 w-100 m-10" style="display: flex;flex-flow: row wrap;">
+    <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
       <img [src]="img" class="h-400 w-95">
     </div>
-    <div class="w-45">
+    <div *ngIf="address" class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
       <p class="type" style="line-height: 3rem;">{{type}}</p>
       <p class="type" style="line-height: 3rem; color:green">{{bedroom}} Bedroom,  {{bathroom}} Bathroom,  {{carspace}} Car Space</p>
 

@@ -1,61 +1,70 @@
-<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-  <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="display:flex;width:100%;margin:10px 5%;">
-    <mat-form-field style="width:43%;margin-right:10px;" class="example-form-field" appearance="outline">
-      <mat-label>Search</mat-label>
-      <input matInput type="text" [(ngModel)]="searchValue" (ngModelChange)="searchProperty($event)">
-      <button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear"
-              (click)="searchValue=''; filteredList = listings;">
-        <mat-icon>close</mat-icon>
-      </button>
-    </mat-form-field>
-    <mat-form-field style="width:15%;margin-right:10px;" appearance="outline">
-      <mat-label>Property Type</mat-label>
-      <mat-select [(ngModel)]="selectedProperty" (selectionChange)="onChangeProperty($event);">
-        <mat-option *ngFor="let type of propertyTypes" [value]="type">
-          {{type}}
-        </mat-option>
-        <mat-option>None</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field style="width:15%;margin-right:10px;" appearance="outline">
-      <mat-label>Features</mat-label>
-      <mat-select [(ngModel)]="selectedState" (selectionChange)="onChangePropertyState($event);">
-        <mat-option *ngFor="let state of specifications" [value]="state">
-          {{state}}
-        </mat-option>
-        <mat-option>None</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field style="width:15%;" appearance="outline">
-      <mat-label>Additional Features</mat-label>
-      <mat-select [(ngModel)]="selectedFeature" (selectionChange)="onChangeFeature($event);">
-        <mat-option *ngFor="let item of features" [value]="item">
-          {{item}}
-        </mat-option>
-        <mat-option>None</mat-option>
-      </mat-select>
-    </mat-form-field>
+<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="padding:2% 3%;">
+  <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="display:flex; flex-flow: row wrap;">
+    <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 filter-input">
+      <mat-form-field style="width: 95%;" appearance="outline">
+        <mat-label>Search</mat-label>
+        <input matInput type="text" [(ngModel)]="searchValue" (ngModelChange)="searchProperty($event)">
+        <button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear"
+                (click)="searchValue=''; filteredList = listings;">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div class="col-md-2 col-lg-2 col-sm-12 col-xs-12 filter-input">
+      <mat-form-field style="width: 95%;" appearance="outline">
+        <mat-label>Property Type</mat-label>
+        <mat-select [(ngModel)]="selectedProperty" (selectionChange)="onChangeProperty($event);">
+          <mat-option *ngFor="let type of propertyTypes" [value]="type">
+            {{type}}
+          </mat-option>
+          <mat-option>None</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-md-2 col-lg-2 col-sm-12 col-xs-12 filter-input">
+      <mat-form-field style="width: 95%;" appearance="outline">
+        <mat-label>Features</mat-label>
+        <mat-select [(ngModel)]="selectedState" (selectionChange)="onChangePropertyState($event);">
+          <mat-option *ngFor="let state of specifications" [value]="state">
+            {{state}}
+          </mat-option>
+          <mat-option>None</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-md-2 col-lg-2 col-sm-12 col-xs-12 filter-input">
+      <mat-form-field style="width: 95%;" appearance="outline">
+        <mat-label>Additional Features</mat-label>
+        <mat-select [(ngModel)]="selectedFeature" (selectionChange)="onChangeFeature($event);">
+          <mat-option *ngFor="let item of features" [value]="item">
+            {{item}}
+          </mat-option>
+          <mat-option>None</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
   </div>
-  <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12"
-       style="width: 100%;display:flex;flex-flow:row wrap;margin: 10px 5%;">
-    <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12" class="box" *ngFor="let item of filteredList">
-      <mat-card class="col-md-3 col-lg-3 col-sm-12 col-xs-12 transform shadow-0 border-gainsboro">
-        <div style="width: 100%;display: flex;">
-          <p class="type" (click)="onClickType(item.type)">{{item.type}}</p>
-          <p class="price" title="{{item.price}}">{{item.price}}</p>
+  <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="display:flex;flex-flow:row wrap;">
+    <div class="col-md-4 col-lg-3 col-sm-12 col-xs-12 box"  *ngFor="let item of filteredList">
+      <mat-card class="transform shadow-0 border-gainsboro">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="display: flex;flex-flow: row wrap">
+          <p class="type col-md-6 col-lg-6 col-sm-12 col-xs-12" (click)="onClickType(item.type)">{{item.type}}</p>
+          <p class="price col-md-6 col-lg-6 col-sm-12 col-xs-12" title="{{item.price}}">{{item.price}}</p>
         </div>
-        <div style="width: 100%;" [routerLink]="['/property', item.id]" style="cursor: pointer;" class="w-100 ovr-h cr-ptr">
-          <img [src]="item.img" >
+        <div style="width: 100%;" [routerLink]="['/property', item.id]" style="cursor: pointer;"
+             class="w-100 ovr-h cr-ptr">
+          <img [src]="item.img">
         </div>
         <div class="address" [routerLink]="['/property', item.id]">
           <span title="{{item.address}}">{{item.address}}</span>
         </div>
-<!--        <div class="feature" [routerLink]="['/property', item.id]">-->
-<!--          <span *ngIf="item.features" title="{{item.features}}">{{item.features}}</span>-->
-<!--          <span *ngIf="item.features==''" >NA</span>-->
-<!--        </div>-->
+        <!--        <div class="feature" [routerLink]="['/property', item.id]">-->
+        <!--          <span *ngIf="item.features" title="{{item.features}}">{{item.features}}</span>-->
+        <!--          <span *ngIf="item.features==''" >NA</span>-->
+        <!--        </div>-->
         <div class="specification">
-          <span *ngIf="item.bedrooms">{{item.bedrooms}} Bedroom, </span><span *ngIf="item.bathrooms"> {{item.bathrooms}} Bathroom, </span><span *ngIf="item.carports"> {{item.carports}} Car Space</span>
+          <span *ngIf="item.bedrooms">{{item.bedrooms}} Bedroom, </span><span *ngIf="item.bathrooms"> {{item.bathrooms}}
+          Bathroom, </span><span *ngIf="item.carports"> {{item.carports}} Car Space</span>
         </div>
       </mat-card>
     </div>
