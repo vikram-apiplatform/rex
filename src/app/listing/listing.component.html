@@ -45,11 +45,11 @@
     </div>
   </div>
   <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="display:flex;flex-flow:row wrap;">
-    <div class="col-md-4 col-lg-3 col-sm-12 col-xs-12 box"  *ngFor="let item of filteredList">
+    <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12 box"  *ngFor="let item of filteredList">
       <mat-card class="transform shadow-0 border-gainsboro">
         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="display: flex;flex-flow: row wrap">
-          <p class="type col-md-6 col-lg-6 col-sm-12 col-xs-12" (click)="onClickType(item.type)">{{item.type}}</p>
-          <p class="price col-md-6 col-lg-6 col-sm-12 col-xs-12" title="{{item.price}}">{{item.price}}</p>
+          <p class="type col-md-6 col-lg-6 col-sm-6 col-xs-12" (click)="onClickType(item.type)">{{item.type}}</p>
+          <p class="price col-md-6 col-lg-6 col-sm-6 col-xs-12" title="{{item.price}}">{{item.price}}</p>
         </div>
         <div style="width: 100%;" [routerLink]="['/property', item.id]" style="cursor: pointer;"
              class="w-100 ovr-h cr-ptr">
