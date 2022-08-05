@@ -13,7 +13,8 @@
     </div>
     <div *ngIf="address" class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
       <p class="type" style="line-height: 3rem;">{{type}}</p>
-      <p class="type" style="line-height: 3rem; color:green">{{bedroom}} Bedroom,  {{bathroom}} Bathroom,  {{carspace}} Car Space</p>
+      <p class="type" style="line-height: 3rem; color:green">{{bedroom}} Bedroom,  {{bathroom}} Bathroom,  {{carspace}}
+        Car Space</p>
 
       <p class="type">Features</p>
       <div style="height: 28vh;
@@ -23,16 +24,25 @@
       <p class="type" style="line-height: 5rem;">{{price}}</p>
 
       <div style="width:100%;">
-        <button mat-raised-button class="contact-btn">Email Now</button>
-        <button mat-raised-button class="contact-btn">Call Agent</button>
+        <button mat-raised-button class="contact-btn" [matMenuTriggerFor]="menu">Email Now</button>
+        <button mat-raised-button class="contact-btn" [matMenuTriggerFor]="menu">Call Agent</button>
       </div>
+      <mat-menu #menu="matMenu" xPosition="after" style="overflow: hidden;">
+        <mat-card (click)="$event.stopPropagation();" style="overflow: hidden" class="mat-elevation-z0">
+          <p style="font-size: 24px;font-weight: bold;text-align: center;">{{agent_name}}</p>
+          <img mat-card-image style="height: 22vh;" src="{{agent_img}}" alt="Agent Profile">
+            <p style="font-size: 13px;color:steelblue;margin-bottom:5px;">Email : {{agent_email}}</p>
+            <p style="font-size: 13px;">Phone : {{agent_phone}}</p>
+        </mat-card>
+      </mat-menu>
     </div>
   </div>
   <div>
     <div style="width:96%; padding: 0 4%">
       <p class="property-desc">Property Description</p>
       <br>
-      <p class="property-subdesc">Amazing access to all that the beautiful Broadwater has to offer including windsurfing, jet skiing, kayaking,
+      <p class="property-subdesc">Amazing access to all that the beautiful Broadwater has to offer including
+        windsurfing, jet skiing, kayaking,
         walking, bike riding and fishing. You will be the envy of all your friends with so many opportunities at your
         doorstep and easy access to some of the best restaurants and Cafes on the Gold Coast. This fantastic property
         offers:</p>
@@ -48,13 +58,15 @@
       <li class="property-list">Small block of only 10 units</li>
       <li class="property-list">Future potential with a land size of 1,320m2</li>
       <br>
-      <p class="property-subdesc">Currently leased to a very good tenant until the 21/2/2023 at a weekly rent of $390. With a low body corporate
+      <p class="property-subdesc">Currently leased to a very good tenant until the 21/2/2023 at a weekly rent of $390.
+        With a low body corporate
         of $55.38pw (discounted) this property is a very attractive investment. To arrange your private inspection
         contact Fox's Real Estate on 55323333.
         “A Local Agent You Can Trust”</p>
     </div>
   </div>
-  <div style="/*display:flex; width:100%; margin:10px 5%; padding-left: 1%; padding: 0 0% 0 2%;*/ display: flex; width: 98%; margin: 10px 3%;">
+  <div
+    style="/*display:flex; width:100%; margin:10px 5%; padding-left: 1%; padding: 0 0% 0 2%;*/ display: flex; width: 98%; margin: 10px 3%;">
     <img src="../../assets/map.png" style="height: inherit; width: inherit;">
   </div>
 

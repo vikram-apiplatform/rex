@@ -93,65 +93,71 @@ export class ListingComponent implements OnInit {
       this.id_list = [];
       if (res1) {
         let result = tempListing['result']['rows'];
+        result.sort((a:any, b:any) => (a.system_ctime > b.system_ctime ? -1 : 1));
+        // result.sort((a:any, b:any) => (a.system_modtime > b.system_modtime ? -1 : 1));
+        // result.sort((a:any, b:any) => (a.system_publication_time > b.system_publication_time ? -1 : 1));
         for (const item of result) {
-          let obj: any = {};
+          // console.log(item['system_publication_time'], item['system_ctime'], item['system_modtime'], item.property.system_search_key)
+          if(item['system_publication_time'] !== null && item['system_publication_time'] !== undefined && item['system_publication_time'] !== '') {
+            let obj: any = {};
 
-          obj['price'] = item.price_advertise_as;
-          if (item.under_contract === true) {
-            obj['price'] = 'Under Contract';
-          }
-          obj['latitude'] = item.property.adr_latitude;
-          obj['longitude'] = item.property.adr_longitude;
-          obj['address'] = item.property.system_search_key;
-          obj['type'] = item.property.property_category.text;
-          obj['state'] = item.system_listing_state
-          if (!this.states.includes(item.system_listing_state)) {
-            this.states.push(item.system_listing_state);
-          }
-          if (!this.propertyTypes.includes(item.property.property_category.text)) {
-            this.propertyTypes.push(item.property.property_category.text);
-          }
-          if (item.listing_primary_image !== null) {
-            obj['img'] = 'https:' + item.listing_primary_image.url;
-          } else {
-            obj['img'] = 'https://i2.au.reastatic.net/360x270-format=avif,/b33bb4e47b9db0bcdac2a8e2eb469d51d09b08413f5d4024ca9b0b9cc0c921ea/image.jpg';
-          }
-          obj['id'] = item.property.id;
-          if (obj['price'] != null && obj['price'] != 'Call Agent') {
-            this.listings.push(obj);
-            this.id_list.push(item.property.id);
-          }
+            obj['price'] = item.price_advertise_as;
+            if (item.under_contract === true) {
+              obj['price'] = 'Under Contract';
+            }
+            obj['latitude'] = item.property.adr_latitude;
+            obj['longitude'] = item.property.adr_longitude;
+            obj['address'] = item.property.system_search_key;
+            obj['type'] = item.property.property_category.text;
+            obj['state'] = item.system_listing_state
+            if (!this.states.includes(item.system_listing_state)) {
+              this.states.push(item.system_listing_state);
+            }
+            if (!this.propertyTypes.includes(item.property.property_category.text)) {
+              this.propertyTypes.push(item.property.property_category.text);
+            }
+            if (item.listing_primary_image !== null) {
+              obj['img'] = 'https:' + item.listing_primary_image.url;
+            } else {
+              obj['img'] = 'https://i2.au.reastatic.net/360x270-format=avif,/b33bb4e47b9db0bcdac2a8e2eb469d51d09b08413f5d4024ca9b0b9cc0c921ea/image.jpg';
+            }
+            obj['id'] = item.property.id;
+            if (obj['price'] != null && obj['price'] != 'Call Agent') {
+              this.listings.push(obj);
+              this.id_list.push(item.property.id);
+            }
 
-          // this.service.getProperty(item.property.id).subscribe(res2 => {
-          //   let tempProperty: any = res2;
-          //   if(res2){
-          //     obj['bedrooms'] = tempProperty['result']['attr_bedrooms'];
-          //     obj['bathrooms'] = tempProperty['result']['attr_bathrooms'];
-          //     obj['carports'] = tempProperty['result']['attr_total_car_accom'];
-          //     let featuresList:any = tempProperty['result']['related']['property_features'];
-          //     let featureList:any = [];
-          //     for(const feature of featuresList){
-          //       if (!this.features.includes(feature.feature_name)) {
-          //         this.features.push(feature.feature_name);
-          //       }
-          //       featureList.push(feature.feature_name);
-          //     }
-          //     obj['features'] = featureList;
-          //     if (obj['address'],obj['bedrooms'],obj['bathrooms'],obj['carports']) {
-          //       let tempSpecification = [obj['bedrooms']+' Bedroom',obj['bathrooms']+' Bathroom',obj['carports']+' Car Space'];
-          //       obj['specification'] = tempSpecification;
-          //       for (let item of tempSpecification){
-          //         if(!this.specifications.includes(item)){
-          //           this.specifications.push(item)
-          //         }
-          //       }
-          //       this.specifications = this.specifications.sort();
-          //       this.listings.push(obj);
-          //     }
-          //     // console.log(this.listings)
-          //
-          //   }
-          // });
+            // this.service.getProperty(item.property.id).subscribe(res2 => {
+            //   let tempProperty: any = res2;
+            //   if(res2){
+            //     obj['bedrooms'] = tempProperty['result']['attr_bedrooms'];
+            //     obj['bathrooms'] = tempProperty['result']['attr_bathrooms'];
+            //     obj['carports'] = tempProperty['result']['attr_total_car_accom'];
+            //     let featuresList:any = tempProperty['result']['related']['property_features'];
+            //     let featureList:any = [];
+            //     for(const feature of featuresList){
+            //       if (!this.features.includes(feature.feature_name)) {
+            //         this.features.push(feature.feature_name);
+            //       }
+            //       featureList.push(feature.feature_name);
+            //     }
+            //     obj['features'] = featureList;
+            //     if (obj['address'],obj['bedrooms'],obj['bathrooms'],obj['carports']) {
+            //       let tempSpecification = [obj['bedrooms']+' Bedroom',obj['bathrooms']+' Bathroom',obj['carports']+' Car Space'];
+            //       obj['specification'] = tempSpecification;
+            //       for (let item of tempSpecification){
+            //         if(!this.specifications.includes(item)){
+            //           this.specifications.push(item)
+            //         }
+            //       }
+            //       this.specifications = this.specifications.sort();
+            //       this.listings.push(obj);
+            //     }
+            //     // console.log(this.listings)
+            //
+            //   }
+            // });
+          }
         }
         // console.log(this.listings)
         this.service.getProperties(this.id_list).subscribe(res2 => {

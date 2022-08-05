@@ -18,6 +18,10 @@ export class PropertyComponent implements OnInit {
   price: any;
   features: any;
   note: any;
+  agent_name:any = '';
+  agent_phone:any = '';
+  agent_email:any = '';
+  agent_img:any = '';
   bedroom = 0;
   bathroom = 0;
   carspace = 0;
@@ -102,6 +106,20 @@ export class PropertyComponent implements OnInit {
         this.features = featureList;
         this.img = 'https:' + tempProperty['result']['default_property_image']['url'];
       }
+      this.service.getListing().subscribe(res1 => {
+        let temp:any = res1;
+        if(res1){
+          for (let item of temp['result']['rows']){
+            if(item.property.id === this.id) {
+              this.agent_name = item.listing_agent_1.name;
+              this.agent_phone = item.listing_agent_1.phone_mobile;
+              this.agent_email = item.listing_agent_1.email_address;
+              this.agent_img = 'https:'+ item.listing_agent_1.profile_image.url;
+
+            }
+          }
+        }
+      });
     })
     // for(const item of this.list) {
     //   if(item['address'].includes(this.address)){

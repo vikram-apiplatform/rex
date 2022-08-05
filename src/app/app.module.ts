@@ -11,6 +11,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCardModule} from '@angular/material/card';
+import {MatMenuModule} from '@angular/material/menu';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { ListingComponent } from './listing/listing.component';
 import { PropertyComponent } from './property/property.component';
@@ -33,7 +34,8 @@ import { PropertyComponent } from './property/property.component';
     MatButtonModule,
     MatSelectModule,
     MatCardModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatMenuModule
 
   ],
   bootstrap: [AppComponent]

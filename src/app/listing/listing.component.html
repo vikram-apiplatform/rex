@@ -53,7 +53,7 @@
         </div>
         <div style="width: 100%;" [routerLink]="['/property', item.id]" style="cursor: pointer;"
              class="w-100 ovr-h cr-ptr">
-          <img [src]="item.img">
+          <img [src]="item.img" class="list-img">
         </div>
         <div class="address" [routerLink]="['/property', item.id]">
           <span title="{{item.address}}">{{item.address}}</span>

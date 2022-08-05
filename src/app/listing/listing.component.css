@@ -71,7 +71,7 @@ img {
   flex: 1 1 auto;
 }
 
-.transform:hover{
+.transform:hover  .list-img{
   transition: transform 1.5s;
   transform: scale(1.1);
 }
@@ -84,6 +84,7 @@ img {
 }
 .shadow-0{
   box-shadow: none;
+  width: 90%;
 }
 
 @media screen and (max-width: 400px) {
