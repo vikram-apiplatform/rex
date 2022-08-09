@@ -135,10 +135,16 @@ export class PropertyComponent implements OnInit {
   }
 
   openEmail() {
+    if (this.agent_email == '' || this.agent_email == undefined || this.agent_email == null) {
+      this.agent_email = 'sales@foxs.com.au';
+    }
     window.location.href = "mailto:" + this.agent_email + "?subject=" + this.address;
   }
 
   makePhone() {
+    if (this.agent_phone == '' || this.agent_phone == undefined || this.agent_phone == null) {
+      this.agent_phone = '5532 3333';
+    }
     window.location.href = "tel:"+this.agent_phone;
   }
 
