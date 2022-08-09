@@ -23,18 +23,18 @@
       </div>
       <p class="type" style="line-height: 5rem;">{{price}}</p>
 
-      <div style="width:100%;">
-        <button mat-raised-button class="contact-btn" [matMenuTriggerFor]="menu">Email Now</button>
-        <button mat-raised-button class="contact-btn" [matMenuTriggerFor]="menu">Call Agent</button>
+      <div style="width:100%;" *ngIf="agent_email !== ''">
+        <button mat-raised-button class="contact-btn"  (click)="openEmail()">Email Now</button>
+        <button mat-raised-button class="contact-btn" (click)="makePhone()">Call Agent</button>
       </div>
-      <mat-menu #menu="matMenu" xPosition="after" style="overflow: hidden;">
-        <mat-card (click)="$event.stopPropagation();" style="overflow: hidden" class="mat-elevation-z0">
-          <p style="font-size: 24px;font-weight: bold;text-align: center;">{{agent_name}}</p>
-          <img mat-card-image style="height: 22vh;" src="{{agent_img}}" alt="Agent Profile">
-            <p style="font-size: 13px;color:steelblue;margin-bottom:5px;">Email : {{agent_email}}</p>
-            <p style="font-size: 13px;">Phone : {{agent_phone}}</p>
-        </mat-card>
-      </mat-menu>
+<!--      <mat-menu #menu="matMenu" xPosition="after" style="overflow: hidden;">-->
+<!--        <mat-card (click)="$event.stopPropagation();" style="overflow: hidden" class="mat-elevation-z0">-->
+<!--          <p style="font-size: 24px;font-weight: bold;text-align: center;">{{agent_name}}</p>-->
+<!--          <img mat-card-image style="height: 22vh;" src="{{agent_img}}" alt="Agent Profile">-->
+<!--            <p style="font-size: 13px;color:steelblue;margin-bottom:5px;">Email : {{agent_email}}</p>-->
+<!--            <p style="font-size: 13px;">Phone : {{agent_phone}}</p>-->
+<!--        </mat-card>-->
+<!--      </mat-menu>-->
     </div>
   </div>
   <div>

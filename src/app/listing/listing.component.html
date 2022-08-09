@@ -58,10 +58,6 @@
         <div class="address" [routerLink]="['/property', item.id]">
           <span title="{{item.address}}">{{item.address}}</span>
         </div>
-        <!--        <div class="feature" [routerLink]="['/property', item.id]">-->
-        <!--          <span *ngIf="item.features" title="{{item.features}}">{{item.features}}</span>-->
-        <!--          <span *ngIf="item.features==''" >NA</span>-->
-        <!--        </div>-->
         <div class="specification">
           <span *ngIf="item.bedrooms">{{item.bedrooms}} Bedroom, </span><span *ngIf="item.bathrooms"> {{item.bathrooms}}
           Bathroom, </span><span *ngIf="item.carports"> {{item.carports}} Car Space</span>
